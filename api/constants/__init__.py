@@ -10,6 +10,9 @@ VIDEO_EXTENSIONS.extend([ext.upper() for ext in VIDEO_EXTENSIONS])
 AUDIO_EXTENSIONS = ["mp3", "m4a", "wav", "webm", "amr"]
 AUDIO_EXTENSIONS.extend([ext.upper() for ext in AUDIO_EXTENSIONS])
 
+DOCUMENT_EXTENSIONS = ["txt", "markdown", "md", "pdf", "html", "htm", "xlsx", "xls", "docx", "csv"]
+DOCUMENT_EXTENSIONS.extend([ext.upper() for ext in DOCUMENT_EXTENSIONS])
+
 ALLOWED_EXTENSIONS = ["txt", "markdown", "md", "pdf", "html", "htm", "xlsx", "xls", "docx", "csv"]
 ALLOWED_EXTENSIONS.extend([ext.upper() for ext in ALLOWED_EXTENSIONS])
 

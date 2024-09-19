@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any
 
 from sqlalchemy import select
 
-from constants import IMAGE_EXTENSIONS
+from constants import AUDIO_EXTENSIONS, DOCUMENT_EXTENSIONS, IMAGE_EXTENSIONS, VIDEO_EXTENSIONS
 from core.file import File, FileBelongsTo, FileExtraConfig, FileTransferMethod, FileType
 from extensions.ext_database import db
 from models import UploadFile
@@ -139,6 +139,12 @@ def _build_from_local_file(
     )
     if file_type == FileType.IMAGE:
         stmt = stmt.where(UploadFile.extension.in_(IMAGE_EXTENSIONS))
+    elif file_type == FileType.VIDEO:
+        stmt = stmt.where(UploadFile.extension.in_(VIDEO_EXTENSIONS))
+    elif file_type == FileType.AUDIO:
+        stmt = stmt.where(UploadFile.extension.in_(AUDIO_EXTENSIONS))
+    elif file_type == FileType.DOCUMENT:
+        stmt = stmt.where(UploadFile.extension.in_(DOCUMENT_EXTENSIONS))
     row = db.session.scalar(stmt)
     if row is None:
         raise ValueError("Invalid upload file")
@@ -156,7 +162,13 @@ def _build_from_local_file(
     return file
 
 
-def _build_from_remote_url(*, mapping, tenant_id, config, transfer_method):
+def _build_from_remote_url(
+    *,
+    mapping: Mapping[str, Any],
+    tenant_id: str,
+    config: FileExtraConfig,
+    transfer_method: FileTransferMethod,
+):
     url = mapping.get("url")
     if not url:
         raise ValueError("Invalid file url")

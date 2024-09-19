@@ -101,6 +101,12 @@ class BaseAppGenerator:
         elif var.type in {VariableEntityType.TEXT_INPUT, VariableEntityType.PARAGRAPH}:
             if var.max_length and len(user_input_value) > var.max_length:
                 raise ValueError(f"{var.variable} in input form must be less than {var.max_length} characters")
+        elif var.type == VariableEntityType.FILE:
+            if not isinstance(user_input_value, dict):
+                raise ValueError(f"{var.variable} in input form must be a file")
+        elif var.type == VariableEntityType.FILE_LIST:
+            if not isinstance(user_input_value, list) or not all(isinstance(item, dict) for item in user_input_value):
+                raise ValueError(f"{var.variable} in input form must be a list of files")
 
         return user_input_value
 
