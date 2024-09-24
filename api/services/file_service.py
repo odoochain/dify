@@ -12,7 +12,6 @@ from configs import dify_config
 from constants import (
     ALLOWED_EXTENSIONS,
     AUDIO_EXTENSIONS,
-    DOCUMENT_EXTENSIONS,
     IMAGE_EXTENSIONS,
     UNSTRUCTURED_ALLOWED_EXTENSIONS,
     VIDEO_EXTENSIONS,
@@ -38,15 +37,18 @@ class FileService:
         extension = filename.split(".")[-1]
         if len(filename) > 200:
             filename = filename.split(".")[0][:200] + "." + extension
-        allowed_extensions = (
-            UNSTRUCTURED_ALLOWED_EXTENSIONS if dify_config.ETL_TYPE == "Unstructured" else ALLOWED_EXTENSIONS
-        )
-        allowed_extensions = (
-            allowed_extensions + IMAGE_EXTENSIONS + VIDEO_EXTENSIONS + AUDIO_EXTENSIONS + DOCUMENT_EXTENSIONS
-        )
 
-        if extension not in allowed_extensions:
-            raise UnsupportedFileTypeError()
+        # Cancel the limitation of file extension cause we need to support custom extensions in multi-modal feature.
+        #
+        # allowed_extensions = (
+        #     UNSTRUCTURED_ALLOWED_EXTENSIONS if dify_config.ETL_TYPE == "Unstructured" else ALLOWED_EXTENSIONS
+        # )
+        # allowed_extensions = (
+        #     allowed_extensions + IMAGE_EXTENSIONS + VIDEO_EXTENSIONS + AUDIO_EXTENSIONS + DOCUMENT_EXTENSIONS
+        # )
+
+        # if extension not in allowed_extensions:
+        #     raise UnsupportedFileTypeError()
 
         # read file content
         file_content = file.read()
