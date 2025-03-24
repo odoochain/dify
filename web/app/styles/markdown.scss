@@ -1,7 +1,7 @@
-@import '../../themes/light';
-@import '../../themes/dark';
-@import '../../themes/markdown-light';
-@import '../../themes/markdown-dark';
+@use '../../themes/light' as light;
+@use '../../themes/dark' as dark;
+@use '../../themes/markdown-light' as markdown-light;
+@use '../../themes/markdown-dark' as markdown-dark;
 
 .markdown-body {
   -ms-text-size-adjust: 100%;
