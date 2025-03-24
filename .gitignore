@@ -205,3 +205,4 @@ plugins.jsonl
 
 # mise
 mise.toml
+/api/dump.rdb

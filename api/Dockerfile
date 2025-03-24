@@ -69,11 +69,13 @@ COPY --from=packages ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 
 # Download nltk data
-RUN python -c "import nltk; nltk.download('punkt'); nltk.download('averaged_perceptron_tagger')"
+COPY docker/download_nltk_data.py /tmp/download_nltk_data.py
+RUN python /tmp/download_nltk_data.py
 
+# Cache tiktoken models
 ENV TIKTOKEN_CACHE_DIR=/app/api/.tiktoken_cache
-
-RUN python -c "import tiktoken; tiktoken.encoding_for_model('gpt2')"
+COPY docker/cache_tiktoken_models.py /tmp/cache_tiktoken_models.py
+RUN python /tmp/cache_tiktoken_models.py --model gpt2
 
 # Copy source code
 COPY . /app/api/

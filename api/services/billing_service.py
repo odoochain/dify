@@ -2,7 +2,7 @@ import os
 from typing import Literal, Optional
 
 import httpx
-from tenacity import retry, retry_if_exception_type, stop_before_delay, wait_fixed
+from tenacity import retry, retry_if_exception_type, stop_after_delay, wait_fixed
 
 from extensions.ext_database import db
 from libs.helper import RateLimiter
@@ -56,7 +56,7 @@ class BillingService:
     @classmethod
     @retry(
         wait=wait_fixed(2),
-        stop=stop_before_delay(10),
+        stop=stop_after_delay(10),  # Changed from stop_before_delay to stop_after_delay
         retry=retry_if_exception_type(httpx.RequestError),
         reraise=True,
     )

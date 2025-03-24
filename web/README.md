@@ -101,15 +101,13 @@ pnpm run test
 ```
 
 If you are not familiar with writing tests, here is some code to refer to:
+
 * [classnames.spec.ts](./utils/classnames.spec.ts)
 * [index.spec.tsx](./app/components/base/button/index.spec.tsx)
 
-
-
-
 ## Documentation
 
-Visit <https://docs.dify.ai/getting-started/readme> to view the full documentation.
+Visit [https://docs.dify.ai/getting-started/readme](https://docs.dify.ai/getting-started/readme) to view the full documentation.
 
 ## Community
 
